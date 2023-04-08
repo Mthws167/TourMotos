@@ -1,4 +1,4 @@
-package com.backend.entity;
+package com.backend.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -33,7 +33,7 @@ public class Motociclista implements Serializable {
     @Column(name = "senha")
     private String senha;
 
-    //TODO criar entidade rota
-//    @Column(name="rotasSalvas")
-//    private Rota rotasSalvas;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="rota")
+    private Rota rota;
 }
