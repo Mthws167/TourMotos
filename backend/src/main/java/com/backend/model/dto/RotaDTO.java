@@ -2,7 +2,10 @@ package com.backend.model.dto;
 
 import com.backend.model.entity.Parada;
 import com.backend.model.entity.PontoInteresse;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
 
