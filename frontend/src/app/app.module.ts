@@ -7,6 +7,10 @@ import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import {MapsComponent} from "./maps/maps.component";
+import { GoogleMapsModule } from '@angular/google-maps'
+import { provideEnvironmentNgxMask} from 'ngx-mask'
+
 
 @NgModule({
   imports: [
@@ -17,13 +21,14 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
+    GoogleMapsModule,
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
 
   ],
-  providers: [],
+  providers: [provideEnvironmentNgxMask(),],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

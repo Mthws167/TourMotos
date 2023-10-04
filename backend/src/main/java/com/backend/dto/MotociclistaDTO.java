@@ -1,7 +1,10 @@
 package com.backend.dto;
 
+import com.backend.entity.Moto;
 import com.backend.entity.Rota;
 import lombok.*;
+
+import java.util.List;
 
 
 @Data
@@ -20,5 +23,7 @@ public class MotociclistaDTO {
 
     private String senha;
 
-    private Rota rota;
+    private List<Rota> rota;
+
+    private Moto moto;
 }

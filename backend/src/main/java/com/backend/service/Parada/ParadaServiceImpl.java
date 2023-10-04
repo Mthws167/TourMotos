@@ -22,6 +22,11 @@ public class ParadaServiceImpl implements ParadaService {
     }
 
     @Override
+    public List<Parada> buscarPorRota(Long id) {
+        return paradaRepository.findAllByRota_Id(id);
+    }
+
+    @Override
     public Parada inserir(Parada parada) throws InfoException {
         if (UtilsParada.validarParada(parada)) {
             return paradaRepository.save(parada);
@@ -36,6 +41,7 @@ public class ParadaServiceImpl implements ParadaService {
                     .id(id)
                     .nome(parada.getNome() != null ? parada.getNome() : null)
                     .endereco(parada.getEndereco() != null ? parada.getEndereco() : null)
+                    .rota(parada.getRota() != null ? parada.getRota() : null)
                     .build();
 
             if (UtilsParada.validarParada(paradaBuilder)) {

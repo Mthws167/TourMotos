@@ -1,13 +1,12 @@
 package com.backend.dto;
 
 import com.backend.entity.Parada;
-import com.backend.entity.PontoInteresse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Timestamp;
+import java.util.List;
 
 
 @Data
@@ -24,9 +23,8 @@ public class RotaDTO{
 
     private Double distancia;
 
-    private Timestamp tempoEstimado;
+    private String tempoViagem;
 
-    private Parada parada;
+    private String link;
 
-    private PontoInteresse pontoInteresse;
 }

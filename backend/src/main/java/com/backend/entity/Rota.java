@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 
 @Entity
@@ -32,15 +33,13 @@ public class Rota implements Serializable {
     @Column(name = "distancia")
     private Double distancia;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    @Column(name = "tempoEstimado")
-    private Date tempoEstimado;
+    @Column(name = "tempoViagem")
+    private String tempoViagem;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parada")
-    private Parada parada;
+    @Column(name = "link")
+    private String link;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pontoInteresse")
-    private PontoInteresse pontoInteresse;
+    @ManyToOne
+    @JoinColumn(name = "motociclista_id")
+    private Motociclista motociclista;
 }

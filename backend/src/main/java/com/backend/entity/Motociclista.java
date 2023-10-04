@@ -3,6 +3,8 @@ package com.backend.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "motociclista")
 @Builder
@@ -30,7 +32,7 @@ public class Motociclista {
     @Column(name="senha")
     private String senha;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="rota")
-    private Rota rota;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="moto")
+    private Moto moto;
 }

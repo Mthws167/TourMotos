@@ -6,6 +6,7 @@ import com.backend.repository.MotociclistaRepository;
 import com.backend.utils.UtilsMotociclista;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,43 +17,82 @@ public class MotociclistaServiceImpl implements MotociclistaService {
     @Autowired
     private MotociclistaRepository motociclistaRepository;
 
+    private BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     @Override
     public List<Motociclista> buscarTodos() {
         return motociclistaRepository.findAll();
     }
 
     @Override
+    public Motociclista buscaPerfil(Long id) throws InfoException {
+        Optional<Motociclista> motociclistaOptional = motociclistaRepository.findById(id);
+        if (motociclistaOptional.isPresent()) {
+            return motociclistaOptional.get();
+        } else {
+            throw new InfoException("Motociclista não encontrado", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @Override
+    public Motociclista buscaPerfilComLogin(String email, String senha) throws InfoException {
+        Motociclista motociclistaOptional = motociclistaRepository.findMotociclistaByEmail(email);
+        if (passwordEncoder().matches(senha, motociclistaOptional.getSenha())) {
+            if (motociclistaOptional != null) {
+                return motociclistaOptional;
+            } else {
+                throw new InfoException("Motociclista não encontrado: " + motociclistaOptional.getNome(), HttpStatus.NOT_FOUND);
+            }
+        }else{
+            throw new InfoException("Senha incorreta", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @Override
     public Motociclista inserir(Motociclista motociclista) throws InfoException {
         if (UtilsMotociclista.validarMotociclista(motociclista)) {
-            return motociclistaRepository.save(motociclista);
-        } else {
-            throw new InfoException("Ocorreu um erro ao cadastrar motociclista", HttpStatus.BAD_REQUEST);
+            if (UtilsMotociclista.validarEmail(motociclista.getEmail())) {
+                if (motociclistaRepository.findMotociclistaByEmail(motociclista.getEmail()) == null) {
+                    if (UtilsMotociclista.validarCPF(motociclista.getCpf())) {
+                        if (motociclistaRepository.findByCpf(motociclista.getCpf()).isEmpty()) {
+                            motociclista.setSenha(passwordEncoder().encode(motociclista.getSenha()));
+                            return motociclistaRepository.save(motociclista);
+                        }
+                        throw new InfoException("Usuário já cadastrado", HttpStatus.BAD_REQUEST);
+                    }
+                    throw new InfoException("CPF inválido", HttpStatus.BAD_REQUEST);
+                }
+                throw new InfoException("Usuário já cadastrado", HttpStatus.BAD_REQUEST);
+            }
+            throw new InfoException("E-mail inválido", HttpStatus.BAD_REQUEST);
         }
-
+        throw new InfoException("Ocorreu um erro ao cadastrar motociclista", HttpStatus.BAD_REQUEST);
     }
 
     @Override
     public Motociclista alterar(Long id, Motociclista motociclista) throws InfoException {
         Optional<Motociclista> motociclistaOptional = motociclistaRepository.findById(id);
-
         if (motociclistaOptional.isPresent()) {
-            Motociclista motociclistaBuilder = Motociclista.builder()
-                    .id(id)
-                    .nome(motociclista.getNome() != null ? motociclista.getNome() : null)
-                    .email(motociclista.getEmail() != null ? motociclista.getEmail() : null)
-                    .cpf(motociclista.getCpf() != null ? motociclista.getCpf() : null)
-                    .senha(motociclista.getSenha() != null ? motociclista.getSenha() : null)
-                    .rota(motociclista.getRota() != null ? motociclista.getRota() : null)
-                    .build();
-
-            if (UtilsMotociclista.validarMotociclista(motociclistaBuilder)) {
-                motociclistaRepository.save(motociclistaBuilder);
+            if (UtilsMotociclista.validarEmail(motociclista.getEmail())) {
+                motociclistaOptional.get().setNome(motociclista.getNome());
+                motociclistaOptional.get().setEmail(motociclista.getEmail());
+                if(motociclista.getMoto() != null){
+                    motociclistaOptional.get().setMoto(motociclista.getMoto());
+                }else{
+                    motociclistaOptional.get().setMoto(null);
+                }
+                motociclistaRepository.save(motociclistaOptional.get());
+                return motociclistaOptional.get();
+            } else {
+                throw new InfoException("E-mail inválido", HttpStatus.BAD_REQUEST);
             }
-            return motociclistaBuilder;
         } else {
-            throw new InfoException("Motociclista não encontrada", HttpStatus.NOT_FOUND);
+            throw new InfoException("Motociclista não encontrado", HttpStatus.NOT_FOUND);
         }
     }
+
 
     @Override
     public void excluir(Long id) throws InfoException {
@@ -61,7 +101,7 @@ public class MotociclistaServiceImpl implements MotociclistaService {
         if (motociclista.isPresent()) {
             motociclistaRepository.delete(motociclista.get());
         } else {
-            throw new InfoException("Motociclista não encontrada", HttpStatus.NOT_FOUND);
+            throw new InfoException("Motociclista não encontrado", HttpStatus.NOT_FOUND);
         }
     }
 }

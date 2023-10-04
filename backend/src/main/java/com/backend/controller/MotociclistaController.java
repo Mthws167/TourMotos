@@ -12,26 +12,42 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/motociclista")
 @RequiredArgsConstructor
-@CrossOrigin()
 public class MotociclistaController {
 
     private final MotociclistaService motociclistaService;
 
+    @CrossOrigin("http://localhost:4200")
     @GetMapping("/listar")
     public List<Motociclista> buscarTodos() {
         return motociclistaService.buscarTodos();
     }
 
+    @CrossOrigin("http://localhost:4200")
+    @GetMapping("/buscaPerfil/{id}")
+    public Motociclista buscaPerfil(@PathVariable("id") Long id) throws InfoException {
+        return motociclistaService.buscaPerfil(id);
+    }
+
+    @CrossOrigin("http://localhost:4200")
+    @GetMapping("/buscaPerfilComLogin")
+    public Motociclista buscaPerfilComLogin(@RequestParam String email, @RequestParam String senha ) throws InfoException {
+        return motociclistaService.buscaPerfilComLogin(email,senha);
+    }
+
+
+    @CrossOrigin("http://localhost:4200")
     @PostMapping("/cadastrar")
     public Motociclista inserir(@RequestBody Motociclista motociclista) throws InfoException {
         return motociclistaService.inserir(motociclista);
     }
 
-    @PutMapping("/atualizar/{id}")
-    public Motociclista alterar(@PathVariable("id") Long id, @RequestBody Motociclista motociclista) throws InfoException {
-        return motociclistaService.alterar(id, motociclista);
+    @CrossOrigin("http://localhost:4200")
+    @PutMapping("/alterar/{id}")
+    public Motociclista alterar(@PathVariable("id") Long id,@RequestBody Motociclista motociclista) throws InfoException {
+        return motociclistaService.alterar(id,motociclista);
     }
 
+    @CrossOrigin("http://localhost:4200")
     @DeleteMapping("/deletar/{id}")
     public ResponseEntity<Void> excluir(@PathVariable("id") Long id) throws InfoException {
         motociclistaService.excluir(id);
