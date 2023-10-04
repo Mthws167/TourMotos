@@ -4,13 +4,17 @@ import {MapsService} from "./maps.service";
 import {SessionStorage} from "../../SessionStorage";
 import Swal from "sweetalert2";
 
+<<<<<<< HEAD
 declare var google: any; // Declaração para usar a biblioteca global do Google Maps
 
+=======
+>>>>>>> cd1f735e56ea2ba545339d442cd9e608b70260cf
 @Component({
     selector: 'app-maps',
     templateUrl: './maps.component.html',
     styleUrls: ['./maps.component.css']
 })
+<<<<<<< HEAD
 export class MapsComponent extends SessionStorage implements OnInit {
     map: google.maps.Map;
     center: google.maps.LatLngLiteral;
@@ -341,3 +345,21 @@ export class MapsComponent extends SessionStorage implements OnInit {
         }
     }
 }
+=======
+export class MapsComponent implements OnInit {
+    constructor() {}
+    ngOnInit(): void {}
+    display: any;
+    center: google.maps.LatLngLiteral = {
+        lat: 24,
+        lng: 12
+    };
+    zoom = 4;
+    moveMap(event: google.maps.MapMouseEvent) {
+        if (event.latLng != null) this.center = (event.latLng.toJSON());
+    }
+    move(event: google.maps.MapMouseEvent) {
+        if (event.latLng != null) this.display = event.latLng.toJSON();
+    }
+}
+>>>>>>> cd1f735e56ea2ba545339d442cd9e608b70260cf

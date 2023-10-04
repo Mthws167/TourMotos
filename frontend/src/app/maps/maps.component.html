@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
@@ -28,3 +29,16 @@
         </div>
     </div>
 </div>
+=======
+<div>
+    <google-map
+            (centerChanged)="center"
+            (zoomChanged)="zoom"
+            (mapClick)="moveMap($event)"
+            (mapMousemove)="move($event)">
+    </google-map>
+
+    <div>Latitude: {{display?.lat}}</div>
+    <div>Longitude: {{display?.lng}}</div>
+</div>
+>>>>>>> cd1f735e56ea2ba545339d442cd9e608b70260cf

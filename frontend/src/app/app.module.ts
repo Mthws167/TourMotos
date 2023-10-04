@@ -8,9 +8,12 @@ import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import {MapsComponent} from "./maps/maps.component";
+<<<<<<< HEAD
 import { GoogleMapsModule } from '@angular/google-maps'
 import { provideEnvironmentNgxMask} from 'ngx-mask'
 
+=======
+>>>>>>> cd1f735e56ea2ba545339d442cd9e608b70260cf
 
 @NgModule({
   imports: [

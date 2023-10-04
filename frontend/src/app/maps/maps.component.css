@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ::ng-deep .main-content{
     overflow: hidden!important;
 }
@@ -76,4 +77,9 @@ button[type="submit"]:hover {
         flex: 0 0 100%; /* Em telas menores, ocupam 100% da largura */
         padding: 0;
     }
+=======
+google-map{
+    height:200px;
+    width:990px;
+>>>>>>> cd1f735e56ea2ba545339d442cd9e608b70260cf
 }
