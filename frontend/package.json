@@ -18,11 +18,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^16.0.2",
-<<<<<<< HEAD
     "@angular/cdk": "^16.0.2",
-=======
-    "@angular/cdk": "^14.2.0",
->>>>>>> cd1f735e56ea2ba545339d442cd9e608b70260cf
     "@angular/common": "^16.0.2",
     "@angular/compiler": "^16.0.2",
     "@angular/core": "^16.0.2",
@@ -30,18 +26,11 @@
     "@angular/forms": "^16.0.2",
     "@angular/google-maps": "^16.0.1",
     "@angular/localize": "^16.0.2",
-<<<<<<< HEAD
     "@angular/material": "^16.0.2",
     "@angular/platform-browser": "^16.0.2",
     "@angular/platform-browser-dynamic": "^16.0.2",
     "@angular/router": "^16.0.2",
     "@swimlane/ngx-charts": "^20.4.1",
-=======
-    "@angular/material": "^14.2.0",
-    "@angular/platform-browser": "^16.0.2",
-    "@angular/platform-browser-dynamic": "^16.0.2",
-    "@angular/router": "^16.0.2",
->>>>>>> cd1f735e56ea2ba545339d442cd9e608b70260cf
     "ajv": "8.11.0",
     "arrive": "2.4.1",
     "axios": "^1.5.0",

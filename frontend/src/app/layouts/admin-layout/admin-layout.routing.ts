@@ -4,13 +4,10 @@ import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { UserProfileComponent } from '../../user-profile/user-profile.component';
 import { TableListComponent } from '../../table-list/table-list.component';
 import { MapsComponent } from '../../maps/maps.component';
-<<<<<<< HEAD
 import {RegisterComponent} from "../../init/resgister/register.component";
 import {LoginComponent} from "../../init/login/login.component";
 import {MotorcycleComponent} from "../../init/motorcycle/motorcycle.component";
 import {LogoutComponent} from "../../init/logout/logout.component";
-=======
->>>>>>> cd1f735e56ea2ba545339d442cd9e608b70260cf
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -59,11 +56,8 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'user-profile',   component: UserProfileComponent },
     { path: 'table-list',     component: TableListComponent },
     { path: 'maps',           component: MapsComponent },
-<<<<<<< HEAD
     { path: 'register',       component: RegisterComponent },
     { path: 'login',       component: LoginComponent },
     { path: 'logout',       component: LogoutComponent },
     { path: 'motorcycle',       component: MotorcycleComponent },
-=======
->>>>>>> cd1f735e56ea2ba545339d442cd9e608b70260cf
 ];
