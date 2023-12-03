@@ -34,12 +34,7 @@ public class MotoServiceImplTest {
         assertEquals(2, motoService.buscarTodos().size());
     }
     @Test
-    public void testInserirMoto() {
-        // Caso de Teste 1: Modelo válido e marca válida
-        Moto moto = new Moto("ABC", "XYZ");
-        InfoException ex = assertThrows(InfoException.class, () -> motoService.inserir(moto));
-        assertEquals("Ocorreu um erro ao cadastrar moto", ex.getMessage());
-        assertEquals(HttpStatus.BAD_REQUEST, ex.getStatus());
+    public void testInserirMotoInvalida() {
         // Caso de Teste 2: Modelo inválido (vazio) e marca válida
         Moto moto1 = new Moto("", "XYZ");
         InfoException ex1 = assertThrows(InfoException.class, () -> motoService.inserir(moto1));
